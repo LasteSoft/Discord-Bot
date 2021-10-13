@@ -10,19 +10,19 @@ Responses = {
 }
 @Bot.event
 async def on_message(message):
-  if message.author == bot.user:
+  if message.author == Bot.user:
     return
   
   for rk, rv in Responses.items():
     if rk in message.content:
       await message.reply(rv)
       
-  await bot.process_commands(message)
+  await Bot.process_commands(message)
 @Bot.event
 async def on_ready():
   print("Tearokoがオンラインになりました！")
-  game = discord.Game(f"TA! | {len(bot.guilds)}サーバー | {len{bot.users)}ユーザー | 作成者: aroko1#6837")
-  await bot.change_presence(activity=game, status=discord.Status.do_not_disturb)
+  game = discord.Game(f'TA! | {len(Bot.guilds)}サーバー | {len(Bot.users)}ユーザー 作成者: aroko1#6837')
+  await Bot.change_presence(activity=game, status=discord.Status.do_not_disturb)
 
 @Bot.event
 async def on_command_error(ctx, error):
@@ -56,7 +56,7 @@ async def on_command_error(ctx, error):
         await ctx.send(embed=embed)
     else:
         raise error
-@bot.command()
+@Bot.command()
 async def help(ctx):
     guild = ctx.message.guild
     embed = discord.Embed(title=f"コマンド一覧 - {guild.name}", timestamp=ctx.message.created_at, color=discord.Colour.dark_blue(), inline=False)
